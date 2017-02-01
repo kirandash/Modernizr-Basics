@@ -4,11 +4,22 @@
     <title>Other Features</title>
     <script src="modernizr-latest-all.js"></script>
     <script type="text/javascript">
-    	//Modernizr.prefixed("transition")
     	//Modernizr -> Object -> Audio
+    	//Modernizr.prefixed("transition")
     	// Modernizr.prefixed('requestAnimationFrame', window, false) - false makes sure to return the name of requestAnimationFrame with webkit if required
     	// Modernizr.mq('(min-width: 2000px)'); - checks if media query satisfied
     	// Modernizr.mq('only all'); - check if media query is supported at all
+    	// Modernizr.testProp('opacity')
+    	/*Modernizr.testStyles('#modernizr { width: 9px; color: papayawhip; }', function(elem, rule) {
+		  // elem is the first DOM node in the page (by default #modernizr)
+		  // rule is the first argument you supplied - the CSS rule in string form
+		  addTest('widthworks', elem.style.width === '9px')
+		});*/
+    	// Modernizr.testProp('boxShadow')
+    	// Modernizr.testProp('-webkit-box-shadow') // checks for only exact rule mentioned
+    	// Modernizr.testAllProps('boxShadow') - checks for all possible rules with or without vendor prefixes
+    	// Modernizr.hasEvent('gestureStart') - check if browser has support for an event
+    	// Modernizr.hasEvent('click') - mobile or desktop check
     </script>
 </head>
 <body>
