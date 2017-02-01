@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Conditionally Running JavaScript</title>
+    <script src="modernizr-custom.js"></script>
+</head>
+<body>
+
+<h1 class="title">Conditionally Running JavaScript</h1>
+<input id="fName" type="text">
+<input id="lName" type="text">
+<input id="nameSubmit" type="button" value="Add Person">
+<div id="users"></div>
+
+<script>
+    var addressBook; //if there's no support, addressBook will stay undefined
+
+    if(!Modernizr.localstorage){
+        // alert the user
+        alert('Sorry but your browser is too old.');
+        //alert();
+    }else{
+        alert();
+        //create a namespace for the various addressBook-related functions
+        addressBook = {};
+
+        addressBook.init = function () {
+            //if there's no entry in localStorage, make one
+            if (!localStorage.people) localStorage.people = JSON.stringify([]);
+
+            //add a click handler to the submit button
+            document.getElementById('nameSubmit').addEventListener('click', addressBook.addPerson);
+
+            //list the current people
+            addressBook.listPeople();
+        };
+
+        addressBook.addPerson = function () {
+            //get the values
+            var fName = document.getElementById('fName').value;
+            var lName = document.getElementById('lName').value;
+
+            //get the data from localStorage
+            var db = JSON.parse(localStorage.people);
+
+            //add our entry
+            db.push({
+                firstName: fName,
+                lastName: lName
+            });
+
+            //put the data back into localStorage
+            localStorage.people = JSON.stringify(db);
+
+            //list the people in the database
+            addressBook.listPeople();
+        };
+
+        addressBook.listPeople = function () {
+            //get the data from localStorage
+            var db = JSON.parse(localStorage.people);
+
+            //don't alert if there aren't entries
+            if (db.length === 0) return false;
+
+            //form an alert with all the names
+            var alertStr = 'The following people are in the database:<br><br>';
+            for (var i = 0; i < db.length; i++) {
+                alertStr += db[i].firstName + ' ' + db[i].lastName + '<br>';
+            }
+
+            //do the alert
+            document.getElementById('users').innerHTML = alertStr;
+        };
+
+        addressBook.init();        
+    }
+
+
+</script>
+</body>
+</html>
