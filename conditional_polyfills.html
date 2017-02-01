@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Conditionally Loading Polyfills</title>
+    <script src="modernizr-latest-includesload.js"></script>
+    <script>
+
+        Modernizr.addTest('placeholder', ('placeholder' in document.createElement('input') && 'placeholder' in document.createElement('textarea')));
+
+    	Modernizr.load({
+    		test: Modernizr.placeholder,
+    		yep: '', // If placeholder is supported - run this file from yep - not needed here
+    		nope: 'placeholder-simple.js' // If placeholder is not supported - run this file from nope //placeholder-simple.js or placeholder-span.js
+    		// http://yepnopejs.com
+    	});      
+
+    </script>
+</head>
+<body>
+
+<h1 class="title">Conditionally Loading Polyfills</h1>
+    <label for="bday">Birthday:</label><input id="bday" type="text" placeholder="MM/DD/YYYY">
+
+</body>
+</html>
